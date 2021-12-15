@@ -60,16 +60,18 @@ const Home = (props) => {
 
     const getImage = () => {
         
-        setDispImg('https://binder.codes/getimage/'+user);
+        setDispImg('https://api.binder.codes/getimage/'+user);
     }
     
     const UploadImage = async () => {
-        const fd = new FormData();
-        let newimage = await resizeImageFn(image);
-
-        fd.append("UserImage", newimage);
+        const formData = new FormData();
+        formData.append('file', image);
         // image.size / 1024 = Kilobytes
-        axios.post('https://binder.codes/add/image/'+user, fd).then(response => {
+        axios.post('https://api.binder.codes/add/image/'+user, formData,{
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }}
+        ).then(response => {
             if(response.status === 200){
                 setUploaderror('');
                 getImage();
@@ -84,7 +86,9 @@ const Home = (props) => {
     }
 
     const getUsername = () =>{
-        axios.get('https://binder.codes/findUser/'+user).then(response => {
+        axios.get('https://api.binder.codes/findUser/'+user).then(response => {
+            console.log(user);
+            console.log(response.data);
         if(response.data[0].username){
             const users = response.data[0].username;
             setUsername(users);

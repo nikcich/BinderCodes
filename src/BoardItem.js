@@ -40,17 +40,17 @@ const BoardItem = (props) => {
     };
 
     const deleteImage = (users_id, location) => {
-        axios.post('http://binder.codes//delete/image', {id: users_id, location: location}).then(result => {
+        axios.post('http://api.binder.codes/delete/image', {id: users_id, location: location}).then(result => {
         });
     }
 
     const deleteUser = (users_id, location) => {
-        axios.post('http://binder.codes/delete', {id: users_id, location: location}).then(result => {
+        axios.post('http://api.binder.codes/delete', {id: users_id, location: location}).then(result => {
         });
     }
 
     const resetUser = (users_id, location) => {
-        axios.post('http://binder.codes/reset', {id: users_id, location: location}).then(result => {
+        axios.post('http://api.binder.codes/reset', {id: users_id, location: location}).then(result => {
         });
     }
   
@@ -83,7 +83,7 @@ const BoardItem = (props) => {
                 <div className="lowerdivision">
                     <div className="boardImageHolder">
                         <div className="boardImage"> 
-                            <img src={'https://binder.codes/getimage/'+item.users_id} id="displayImg1" className="displayImg1" alt="Loading..."></img>
+                            <img src={'https://api.binder.codes/getimage/'+item.users_id} id="displayImg1" className="displayImg1" alt="Loading..."></img>
                         </div>
                     </div>
                 </div>

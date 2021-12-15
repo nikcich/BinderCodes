@@ -36,7 +36,7 @@ const Vote = (props) => {
     const getTop =  () => {
         setReady(false);
         if(user !== -1 ){
-            axios.get('https://binder.codes/users/next/'+user).then(result => {
+            axios.get('https://api.binder.codes/users/next/'+user).then(result => {
                 let max = result.data.max;
                 setMax(max);
                 let res = result.data.result;
@@ -44,7 +44,7 @@ const Vote = (props) => {
                     setTop(res);
                 }else{
                     setTop([]);
-                    axios.get('https://binder.codes/getref/'+user).then(result2 => {
+                    axios.get('https://api.binder.codes/getref/'+user).then(result2 => {
                         setReference(result2.data.theID);
                         if(result2.data.theID <= max){
                             getTop();
@@ -57,7 +57,7 @@ const Vote = (props) => {
 
     const handleVote = (vote, users_id, id) => {
         if(ready === true){
-            axios.post('https://binder.codes/vote', {ballot: vote, img: users_id, id: user}).then(result => {
+            axios.post('https://api.binder.codes/vote', {ballot: vote, img: users_id, id: user}).then(result => {
                 getTop();
             });
         }
@@ -73,7 +73,7 @@ const Vote = (props) => {
             {(user > 0 && reference <= maximum) ? ( topitems.map((item, idx) => (
                 <div key={idx} className="topImageHolder">
                     <div className="topImage"> 
-                        <img key={idx+1} id="votingImage" src={'https://binder.codes/getimage/'+item.users_id} className="displayImg1" alt="loading..." onLoad={() => setReady(true)} style={!ready ? {visibility:"hidden", width: "0px"} : {}}></img>
+                        <img key={idx+1} id="votingImage" src={'https://api.binder.codes/getimage/'+item.Accounts_id} className="displayImg1" alt="loading..." onLoad={() => setReady(true)} style={!ready ? {visibility:"hidden", width: "0px"} : {}}></img>
                         {!ready ? (
                             <div>LOADING IMAGE...</div>
                         ):(

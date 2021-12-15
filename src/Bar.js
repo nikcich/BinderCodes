@@ -24,14 +24,14 @@ const icStyles = {
 };
 
 
-const Bar = (props) => {
+const Bar = () => {
 
     return (
         <div>
             <div className="Bar">
                 <div className="left-bar">
                 <div className="right-bar">
-                    <Link style={LinkStyles} onClick={() => {window.location.href = "https://binder.codes/home";}}>
+                    <Link to="" style={LinkStyles} onClick={() => {window.location.href = "https://binder.codes/home";}}>
                         <IconButton style={iconStyles}>
                             <HomeIcon style={icStyles}/>
                         </IconButton>
@@ -39,16 +39,16 @@ const Bar = (props) => {
                 </div>
                 </div>
                 
-                <img src={'https://binder.codes/getimage/-1'} className="barLogo" alt="Loading..."></img>
+                <img src={'https://api.binder.codes/getimage/-1'} className="barLogo" alt="Loading..."></img>
 
                 <div className="right-bar">
-                    <Link style={LinkStyles} onClick={() => {window.location.href = "https://binder.codes/top";}}>
+                    <Link to="" style={LinkStyles} onClick={() => {window.location.href = "https://binder.codes/top";}}>
                         <IconButton style={iconStyles}>
                             <ListIcon style={icStyles}/>
                         </IconButton>
                     </Link>
 
-                    <Link style={LinkStyles} onClick={() => {window.location.href = "https://binder.codes/account";}}>
+                    <Link to="" style={LinkStyles} onClick={() => {window.location.href = "https://binder.codes/account";}}>
                         <IconButton style={iconStyles}>
                             <AccountBoxIcon style={icStyles}/>
                         </IconButton>

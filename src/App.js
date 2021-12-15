@@ -51,7 +51,7 @@ const App = () =>{
       return;
     }
 
-    axios.get('https://binder.codes/find/'+username).then(response => {
+    axios.get('https://api.binder.codes/find/'+username).then(response => {
       const users = response.data;
       if(users.length > 0){
         setUsernameError('User already exists');
@@ -63,11 +63,11 @@ const App = () =>{
             setPasswordError('Error encrypting password');
           }else{
             // Create new user with password
-            axios.post('https://binder.codes/add/user', {newusername: username, newpassword: hash}).then(response => {
+            axios.post('https://api.binder.codes/add/user', {newusername: username, newpassword: hash}).then(response => {
               setUser(response.data.insertId);
               setAuth(true);
               Cookies.set("user", response.data.insertId, { expires: 0.04166666666, domain: urlDomain});
-              window.location.href = "https://binder.codes/account";
+              //window.location.href = "https://binder.codes/account";
             });
           }
         });
@@ -123,15 +123,16 @@ const LoginPage = (props) => {
       return;
     }
 
-    axios.get('https://binder.codes/users?username='+username+'&pass='+password).then(response => {
+    axios.get('https://api.binder.codes/users?username='+username+'&pass='+password).then(response => {
       const users = response.data;
-      if(users.data < 0){
-        setUsernameError('User does not exist');
+      if(users < 0){
+        setUsernameError('Invalid Credentials');
       }else{
-        setUser(users.data);
+        console.log(users);
+        setUser(users);
         setAuth(true);
-        Cookies.set("user", users.data, { expires: 0.04166666666, domain: urlDomain});
-        window.location.href = "https://binder.codes/account";
+        Cookies.set("user", users, { expires: 0.04166666666, domain: urlDomain});
+        //window.location.href = "https://binder.codes/account";
 
       }
     }).catch(error => {
@@ -144,7 +145,7 @@ const LoginPage = (props) => {
   return(
     <div className="AppBackground">
       <div className="App-header">
-      <img src={'https://binder.codes/getimage/-1'} className="barLogoLogin" alt="Loading..."></img>
+      <img src={'https://api.binder.codes/getimage/-1'} className="barLogoLogin" alt="Loading..."></img>
           <LoginBox 
             user={user}
             setUser={setUser}
