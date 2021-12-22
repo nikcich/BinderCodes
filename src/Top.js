@@ -21,7 +21,7 @@ const Top = (props) => {
         <div className="Top">
             <div className="marginBar">
             </div>
-            <h2>Top Voted Bikes</h2>
+            <h2 className="color-white">Top Voted Bikes</h2>
             <div className="marginBar">
             </div>
             {topitems.map((item, idx) => (

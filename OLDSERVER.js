@@ -11,12 +11,7 @@ const path = require('path');
 const multer  = require('multer');
 const fs = require('fs');
 
-const db = mysql.createConnection({
-    host: '66.228.51.99',
-    user: 'root',
-    password: 'monkeroni115',
-    database: 'test'
-});
+///connect was here
 
 db.connect((err) => {
     if(err){
@@ -67,6 +62,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json({limit: '1mb', extended: true}))
 app.use(bodyParser.urlencoded({limit: '1mb', extended: true}))
+
 app.use(express.static(path.join(__dirname, 'build')));
 
 

@@ -6,13 +6,13 @@
 
 :root {
   --main-bg-color: rgb(94, 0, 0);
-  --primary-color: #0B0E11;
-  --secondary-color: #151A21;
+  --primary-color: #ff4151;
+  --secondary-color: #fafafa;
   --bar-color: rgb(131, 0, 50);
-  --shadow-color: #ffffff0e;
-  --bg-grad-1: #151A21;
-  --bg-grad-2: #171d24;
-  --main-text: #DEE3EA;
+  --shadow-color: #0000008f;
+  --bg-grad-1: #f8f8f8;
+  --bg-grad-2: #c5c5c5;
+  --main-text: #fff;
   overflow: hidden;
 
 }
@@ -24,12 +24,16 @@
   flex-direction: column;
   align-items: center;
   width: 50vh;
-  background: var(--secondary-color);
   justify-content: space-evenly;
   border-radius: 1vh;
   margin: 1vh;
-  filter: drop-shadow(1px 4px 4px var(--shadow-color));
   flex-grow: 1;
+
+  backdrop-filter: blur(10px) saturate(200%);
+  -webkit-backdrop-filter: blur(10px) saturate(200%);
+  background-color: rgba(17, 25, 40, 0.6);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
 }
 
 .accountRightCard{
@@ -52,11 +56,15 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  background: var(--secondary-color);
   justify-content: space-evenly;
   border-radius: 1vh;
-  filter: drop-shadow(1px 4px 4px var(--shadow-color));
   margin-bottom: 2vh;
+
+  backdrop-filter: blur(10px) saturate(200%);
+  -webkit-backdrop-filter: blur(10px) saturate(200%);
+  background-color: rgba(17, 25, 40, 0.6);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
 
   
 }
@@ -72,7 +80,9 @@
 
 .homeBack{
   height: 100vh;
-  background-image: linear-gradient(to top left, var(--bg-grad-1), var(--bg-grad-2));
+  background-image: url('https://wallpaperaccess.com/full/484931.jpg');
+  background-position: center;
+  background-size: cover;
 }
 
 .HomePage{
@@ -130,6 +140,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  background-image: url('https://wallpaperaccess.com/full/484931.jpg');
+  background-position: center;
+  background-size: cover;
 }
 
 .LoginBox{
@@ -139,13 +153,25 @@
   flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
-  background-color: var(--secondary-color);
   padding: 20px 20px 20px 20px;
   border-radius: 1vh;
   justify-content: space-around;
   margin-bottom: 28vh;
-  filter: drop-shadow(1px 4px 4px var(--shadow-color));
+  
+  backdrop-filter: blur(10px) saturate(200%);
+  -webkit-backdrop-filter: blur(10px) saturate(200%);
+  background-color: rgba(17, 25, 40, 0.6);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+
 }
+
+
+
+
+
+
+
 
 .outlined-required{
   width: 100%;
@@ -205,15 +231,19 @@
 .Bar{
   width: 100%;
   height: 5vh;
-  background-color: var(--primary-color);
   margin-bottom: 5vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  filter: drop-shadow(.2vh .8vh .8vh var(--shadow-color));
   position: fixed;
   z-index: 10;
   overflow: auto;
+
+  backdrop-filter: blur(10px) saturate(200%);
+  -webkit-backdrop-filter: blur(10px) saturate(200%);
+  background-color: rgba(17, 25, 40, 0.6);
+  border-radius: 0;
+  border: 1px solid rgba(255, 255, 255, 0.125);
 
 }
 
@@ -238,7 +268,10 @@
   position:relative;
   bottom: 5vh;
   height: 97.5vh;
-  background-image: linear-gradient(to top left, var(--bg-grad-1), var(--bg-grad-2));
+  
+  background-image: url('https://wallpaperaccess.com/full/484931.jpg');
+  background-position: center;
+  background-size: cover;
 }
 
 
@@ -251,21 +284,51 @@
   position:relative;
   bottom: 5vh;
   height: 97.5vh;
-  background-image: linear-gradient(to top left, var(--bg-grad-1), var(--bg-grad-2));
+
+
+  background-image: url('https://wallpaperaccess.com/full/484931.jpg');
+  background-position: center;
+  background-size: cover;
+
+}
+
+.noMoreText{
+  color: var(--main-text)
 }
 
 .topImageHolder{
   width: 45vh;
   height: 45vh;
-  background-color: var(--secondary-color);
   margin-bottom: 5vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border-radius: .75vw;
-  filter: drop-shadow(.2vw .8vw .8vw var(--shadow-color));
   margin-top: 5vh;
+
+  backdrop-filter: blur(10px) saturate(200%);
+  -webkit-backdrop-filter: blur(10px) saturate(200%);
+  background-color: rgba(17, 25, 40, 0.6);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+
+}
+
+.color-white{
+  color: white;
+}
+
+.profileImage{
+    width: 45vh;
+    height: 45vh;
+    margin-bottom: 5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: .75vw;
+    margin-top: 5vh;
 }
 
 .topImage{

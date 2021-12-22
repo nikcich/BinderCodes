@@ -57,6 +57,7 @@ const Vote = (props) => {
 
     const handleVote = (vote, users_id, id) => {
         if(ready === true){
+            console.log(users_id);
             axios.post('https://api.binder.codes/vote', {ballot: vote, img: users_id, id: user}).then(result => {
                 getTop();
             });
@@ -82,7 +83,7 @@ const Vote = (props) => {
                     </div>
                     <div>
                         <Button variant="contained" color="primary" component="span" style={bttnStyleNo}
-                            onClick={() => handleVote(0, item.users_id, item.id)}
+                            onClick={() => handleVote(0, item.Accounts_id, item.id)}
                         >
                         No
                         </Button>
@@ -97,7 +98,7 @@ const Vote = (props) => {
 
             {(topitems.length === 0 && reference > maximum) ? (
                 <div>
-                    <h1>No More Images to Show</h1>
+                    <h1 className="noMoreText">No More Images to Show</h1>
                 </div>
             ):(
                 <div></div>

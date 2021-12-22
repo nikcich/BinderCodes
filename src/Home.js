@@ -87,14 +87,12 @@ const Home = (props) => {
 
     const getUsername = () =>{
         axios.get('https://api.binder.codes/findUser/'+user).then(response => {
-            console.log(user);
-            console.log(response.data);
-        if(response.data[0].username){
-            const users = response.data[0].username;
-            setUsername(users);
-        }else{
-            setUsername('');
-        }
+            if(response.data[0].username){
+                const users = response.data[0].username;
+                setUsername(users);
+            }else{
+                setUsername('');
+            }
         }).catch(error => {
             setUsername('');
         });
@@ -132,7 +130,7 @@ const Home = (props) => {
                             Upload Image
                         </Button>
                     </form>
-                    <div className="topImageHolder">
+                    <div className="profileImage">
                         <h2 className="topLabel">Current Image:</h2>
                         <div className="topImage"> 
                             <img src={dispImg} id="displayImg1" className="displayImg1" alt="Loading..."></img>

@@ -14,7 +14,7 @@ import Dashboard from './Dashboard';
 const bcrypt = require('bcryptjs');
 const saltRounds = 6;
 
-const urlDomain = `localhost`; //.binder.codes
+const urlDomain = `.binder.codes`; //.binder.codes
 
 const App = () =>{
 
@@ -67,7 +67,7 @@ const App = () =>{
               setUser(response.data.insertId);
               setAuth(true);
               Cookies.set("user", response.data.insertId, { expires: 0.04166666666, domain: urlDomain});
-              //window.location.href = "https://binder.codes/account";
+              window.location.href = "https://binder.codes/account";
             });
           }
         });
@@ -132,7 +132,7 @@ const LoginPage = (props) => {
         setUser(users);
         setAuth(true);
         Cookies.set("user", users, { expires: 0.04166666666, domain: urlDomain});
-        //window.location.href = "https://binder.codes/account";
+        window.location.href = "https://binder.codes/account";
 
       }
     }).catch(error => {
