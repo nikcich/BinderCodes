@@ -13,7 +13,7 @@ const Dashboard = (props) => {
     const [realUser, setRealUser] = useState('-1');
 
     useEffect(() => {
-        axios.get('https://api.binder.codes/dashboard/data/'+user).then(response => {
+        axios.get('https://api.cichosz.dev/dashboard/data/'+user).then(response => {
             getBoard(response.data);
             setRealUser(user);
         });

@@ -1,40 +1,40 @@
-import React, {useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import './App.css';
 import LoginBox from './LoginBox';
 import Home from './Home';
 import axios from 'axios';
-import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect, Switch, useHistory } from "react-router-dom";
 import Cookies from 'js-cookie';
 import Bar from './Bar';
 import Top from './Top';
 import Vote from './Vote';
-
 import Dashboard from './Dashboard';
 
 const bcrypt = require('bcryptjs');
 const saltRounds = 6;
 
-const urlDomain = `.binder.codes`; //.binder.codes
+const urlDomain = `.cichosz.dev`; //.cichosz.dev
 
-const App = () =>{
+const App = () => {
 
   const [user, setUser] = useState(-1);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [usernameError, setUsernameError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-
   const [auth, setAuth] = useState(false);
+
+  let history = useHistory();
 
   const readCookie = () => {
     const userCookie = Cookies.get("user");
-    if(userCookie){
+    if (userCookie) {
       setUser(userCookie);
       setAuth(true);
     }
   }
 
-  
+
 
   useEffect(() => {
     readCookie();
@@ -43,31 +43,32 @@ const App = () =>{
   const handleSignUp = () => {
     // Check if User Already Exists
     // If Exists throw error
-    if(username === ''){
+    if (username === '') {
       setUsernameError('Please provide a username');
       return;
-    }else if(password === ''){
+    } else if (password === '') {
       setUsernameError('Please provide a password');
       return;
     }
 
-    axios.get('https://api.binder.codes/find/'+username).then(response => {
+    axios.get('https://api.cichosz.dev/find/' + username).then(response => {
       const users = response.data;
-      if(users.length > 0){
+      if (users.length > 0) {
         setUsernameError('User already exists');
-      }else{
+      } else {
         // Else encrypt password
-        bcrypt.hash(password, saltRounds, function(err, hash) {
+        bcrypt.hash(password, saltRounds, function (err, hash) {
           // Store hash in your password DB.
-          if(err){
+          if (err) {
             setPasswordError('Error encrypting password');
-          }else{
+          } else {
             // Create new user with password
-            axios.post('https://api.binder.codes/add/user', {newusername: username, newpassword: hash}).then(response => {
+            axios.post('https://api.cichosz.dev/add/user', { newusername: username, newpassword: hash }).then(response => {
               setUser(response.data.insertId);
               setAuth(true);
-              Cookies.set("user", response.data.insertId, { expires: 0.04166666666, domain: urlDomain});
-              window.location.href = "https://binder.codes/account";
+              Cookies.set("user", response.data.insertId, { expires: 0.04166666666, domain: urlDomain });
+              // window.location.href = "https://cichosz.dev/account";
+              history.push("/account");
             });
           }
         });
@@ -79,28 +80,28 @@ const App = () =>{
   }
 
   return (
-        <Router>
-          <Routes 
-            user={user}
-            setUser={setUser}
-            password={password}
-            setPassword={setPassword}
-            usernameError={usernameError}
-            passwordError={passwordError}
-            handleSignUp={handleSignUp}
-            setUsernameError={setUsernameError}
-            setPasswordError={setPasswordError}
-            setAuth={setAuth}
-            auth={auth}
-            username={username}
-            setUsername={setUsername}
-          />
-        </Router>
+    <Router>
+      <Routes
+        user={user}
+        setUser={setUser}
+        password={password}
+        setPassword={setPassword}
+        usernameError={usernameError}
+        passwordError={passwordError}
+        handleSignUp={handleSignUp}
+        setUsernameError={setUsernameError}
+        setPasswordError={setPasswordError}
+        setAuth={setAuth}
+        auth={auth}
+        username={username}
+        setUsername={setUsername}
+      />
+    </Router>
   );
 }
 
 const LoginPage = (props) => {
-  const{ 
+  const {
     user,
     setUser,
     password,
@@ -115,24 +116,25 @@ const LoginPage = (props) => {
   } = props;
 
   const handleLogin = () => {
-    if(username === ''){
+    if (username === '') {
       setUsernameError('Please provide a username');
       return;
-    }else if(password === ''){
+    } else if (password === '') {
       setUsernameError('Please provide a password');
       return;
     }
 
-    axios.get('https://api.binder.codes/users?username='+username+'&pass='+password).then(response => {
+    axios.get('https://api.cichosz.dev/users?username=' + username + '&pass=' + password).then(response => {
       const users = response.data;
-      if(users < 0){
+      if (users < 0) {
         setUsernameError('Invalid Credentials');
-      }else{
+      } else {
         console.log(users);
         setUser(users);
         setAuth(true);
-        Cookies.set("user", users, { expires: 0.04166666666, domain: urlDomain});
-        window.location.href = "https://binder.codes/account";
+        Cookies.set("user", users, { expires: 0.04166666666, domain: urlDomain });
+        //window.location.href = "https://cichosz.dev/account";
+        history.push("/account");
 
       }
     }).catch(error => {
@@ -142,23 +144,23 @@ const LoginPage = (props) => {
   }
 
 
-  return(
+  return (
     <div className="AppBackground">
       <div className="App-header">
-      <img src={'https://api.binder.codes/getimage/-1'} className="barLogoLogin" alt="Loading..."></img>
-          <LoginBox 
-            user={user}
-            setUser={setUser}
-            password={password}
-            setPassword={setPassword}
-            handleLogin={handleLogin}
-            usernameError={usernameError}
-            passwordError={passwordError}
-            handleSignUp={handleSignUp}
-            username={username}
-            setUsername={setUsername}
-          />
-        
+        <img src={'https://api.cichosz.dev/getimage/-1'} className="barLogoLogin" alt="Loading..."></img>
+        <LoginBox
+          user={user}
+          setUser={setUser}
+          password={password}
+          setPassword={setPassword}
+          handleLogin={handleLogin}
+          usernameError={usernameError}
+          passwordError={passwordError}
+          handleSignUp={handleSignUp}
+          username={username}
+          setUsername={setUsername}
+        />
+
       </div>
     </div>
   )
@@ -166,32 +168,32 @@ const LoginPage = (props) => {
 
 
 const Routes = (props) => {
-  const{ 
-      user,
-      setUser,
-      password,
-      setPassword,
-      usernameError,
-      passwordError,
-      handleSignUp,
-      setUsernameError,
-      setPasswordError,
-      setAuth,
-      auth,
-      username,
-      setUsername
+  const {
+    user,
+    setUser,
+    password,
+    setPassword,
+    usernameError,
+    passwordError,
+    handleSignUp,
+    setUsernameError,
+    setPasswordError,
+    setAuth,
+    auth,
+    username,
+    setUsername
   } = props;
 
   const subdomain = window.location.host.split(".")[0];
   const sub = subdomain === "dashboard";
 
   const logOut = () => {
-    Cookies.remove('user', { domain: urlDomain});
+    Cookies.remove('user', { domain: urlDomain });
     setAuth(false);
     setUser(-1);
   }
 
-  return(
+  return (
     <div>
       {sub && auth ? (
         <Switch>
@@ -201,7 +203,7 @@ const Routes = (props) => {
             </div>
           </Route>
           <Route path="/">
-            <Dashboard 
+            <Dashboard
               user={user}
               setUser={setUser}
               password={password}
@@ -218,63 +220,63 @@ const Routes = (props) => {
             ></Dashboard>
           </Route>
         </Switch>
-      ):(
+      ) : (
         <Switch>
-            <Route path="/account" >
-              {!auth?(
-                <Redirect to="/" />
-              ):(
-                <Home 
-                  logOut={logOut}
-                  user={user}
-                />
-              )}
-            </Route >
-            <Route path="/home">
-                {(!auth && !Cookies.get("user")) ?(
-                  <Redirect to="/" />
-                ):(
-                  <div>
-                    <Bar />
-                    <Vote user={Cookies.get("user")}/>
-                  </div>
-                )}
-            </Route>
-            <Route path="/top">
-                {(!auth && !Cookies.get("user")) ?(
-                  <Redirect to="/" />
-                ):(
-                  <div>
-                    <Bar />
-                    <Top />
-                  </div>
-                )}
-              </Route>
-            
-            <Route path="/">
-                {auth?(
-                  <Redirect to="/account"/>
-                ):(
-                  <LoginPage
-                    user={user}
-                    setUser={setUser}
-                    password={password}
-                    setPassword={setPassword}
-                    usernameError={usernameError}
-                    passwordError={passwordError}
-                    handleSignUp={handleSignUp}
-                    setUsernameError={setUsernameError}
-                    setPasswordError={setPasswordError}
-                    setAuth={setAuth}
-                    auth={auth}
-                    username={username}
-                    setUsername={setUsername}
-                  />
-                )}
-              </Route >
+          <Route path="/account" >
+            {!auth ? (
+              <Redirect to="/" />
+            ) : (
+              <Home
+                logOut={logOut}
+                user={user}
+              />
+            )}
+          </Route >
+          <Route path="/home">
+            {(!auth && !Cookies.get("user")) ? (
+              <Redirect to="/" />
+            ) : (
+              <div>
+                <Bar />
+                <Vote user={Cookies.get("user")} />
+              </div>
+            )}
+          </Route>
+          <Route path="/top">
+            {(!auth && !Cookies.get("user")) ? (
+              <Redirect to="/" />
+            ) : (
+              <div>
+                <Bar />
+                <Top />
+              </div>
+            )}
+          </Route>
+
+          <Route path="/">
+            {auth ? (
+              <Redirect to="/account" />
+            ) : (
+              <LoginPage
+                user={user}
+                setUser={setUser}
+                password={password}
+                setPassword={setPassword}
+                usernameError={usernameError}
+                passwordError={passwordError}
+                handleSignUp={handleSignUp}
+                setUsernameError={setUsernameError}
+                setPasswordError={setPasswordError}
+                setAuth={setAuth}
+                auth={auth}
+                username={username}
+                setUsername={setUsername}
+              />
+            )}
+          </Route >
         </Switch>
       )}
-    </div> 
+    </div>
   )
 }
 

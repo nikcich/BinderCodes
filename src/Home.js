@@ -60,14 +60,14 @@ const Home = (props) => {
 
     const getImage = () => {
         
-        setDispImg('https://api.binder.codes/getimage/'+user);
+        setDispImg('https://api.cichosz.dev/getimage/'+user);
     }
     
     const UploadImage = async () => {
         const formData = new FormData();
         formData.append('file', image);
         // image.size / 1024 = Kilobytes
-        axios.post('https://api.binder.codes/add/image/'+user, formData,{
+        axios.post('https://api.cichosz.dev/add/image/'+user, formData,{
             headers: {
               'Content-Type': 'multipart/form-data'
             }}
@@ -86,7 +86,7 @@ const Home = (props) => {
     }
 
     const getUsername = () =>{
-        axios.get('https://api.binder.codes/findUser/'+user).then(response => {
+        axios.get('https://api.cichosz.dev/findUser/'+user).then(response => {
             if(response.data[0].username){
                 const users = response.data[0].username;
                 setUsername(users);
