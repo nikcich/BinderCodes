@@ -35,7 +35,7 @@ const Vote = (props) => {
     
     const getTop =  () => {
         setReady(false);
-        if(user !== -1 ){
+        if(user !== -1 && user !== undefined ){
             axios.get('https://api.cichosz.dev/users/next/'+user).then(result => {
                 let max = result.data.max;
                 setMax(max);
